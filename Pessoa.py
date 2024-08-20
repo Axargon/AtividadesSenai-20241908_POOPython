@@ -49,7 +49,25 @@ class PessoaFisica(Pessoa):
 
 # CLasse pessoa Jurídica
 class PessoaJuridica(Pessoa):
-    pass
+    def __init__(self, nome="", rendimento=0, endereco=None, cnpj = ""):
+        if endereco is None:
+            #se nenhum endereco for fornecido, cria um endereco de objeto padrao
+            endereco =Endereco()
+
+        super().__init__(nome, rendimento, endereco)
+        #Chama o construtor da superclasse Pessoa para inicializar os atributos herdados
+
+        self.cnpj = cnpj
+
+    def calcular_imposto(self, rendimento: float) -> float:
+        if rendimento <= 10000:
+            return ((rendimento/100) * 2.5) #sem imposto para rendimentos ate 10000
+        elif 10000 < rendimento <= 20000:
+            return ((rendimento/100) * 3.75) #imposto de 2% para rendimentos entre 1500 e 3500
+        elif 25000 < rendimento <= 100000:
+            return((rendimento/100)* 4.25) #imposto de 3.5% para rendimentos entre 3500 e 6000
+        else:
+            return ((rendimento/100) *5) #imposto de 5% para rendimentos acima de 6000
 
 
 

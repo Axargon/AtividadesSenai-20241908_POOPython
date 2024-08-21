@@ -5,10 +5,10 @@ from Pessoa import Endereco, PessoaFisica, PessoaJuridica
 def main ():
     lista_pf =[]
     while True:
-        opcao = int(input("Escolha uma opção: \n1-Pessoa Física \n2-Pessoa Jurídica \n0-Sair "))
+        opcao = int(input("Escolha uma opção: \n1-Pessoa Física \n2-Pessoa Jurídica \n0-Sair\n "))
         if opcao ==1:
             while True:
-                opcao_pf= int(input("Escolha uma opção: \n1-Cadastrar Pessoa física \n2-Listar Pessoa física \n3-Remover Cadastro \n0-Voltar ao Menu anterior  "))
+                opcao_pf= int(input("Escolha uma opção: \n1-Cadastrar Pessoa física \n2-Listar Pessoa física \n3-Remover Cadastro \n4-Atualizar contato \n0-Voltar ao Menu anterior\n"))
                 if opcao_pf == 1 :
                     novapf = PessoaFisica()
                     novo_end_pf = Endereco()
@@ -58,7 +58,34 @@ def main ():
                             validacao = True
                             break
                     if validacao == False:
-                        print("Pessoa não encontrada")                   
+                        print("Pessoa não encontrada")
+                elif opcao_pf==4:
+                    id_atualizar = input("Informe o CPF que pretende atualizar: ") 
+                    ctato_valido=False
+                    for pf in lista_pf:
+                        if id_atualizar == pf.cpf:
+                            ctato_atz = pf
+                            lista_pf.remove(pf)
+                            ctato_valido = True
+                    if ctato_valido ==False:
+                        print("Contato não encontrado, digite cpf válido.")
+                        break
+                    opcao_atz = int(input("Informe item a ser atualizado: \n1-Nome \n2-Endereco \n3-Rendimento\n"))
+                    if opcao_atz == 1:
+                        ctato_atz.nome = input("Digite o novo nome: ")
+                        print(f"Nome do cpf {ctato_atz.cpf} atualizado para: {ctato_atz.nome}")
+                    elif opcao_atz == 2:
+                        ctato_atz.endereco.logradouro = input("Digite o novo logradouro: ")
+                        ctato_atz.endereco.numero = input("Digite o novo numero: ")
+                        print(f"Endereco do cpf {ctato_atz.cpf} atualizado para: {ctato_atz.endereco.logradouro}, {ctato_atz.endereco.numero}")
+                    elif opcao_atz == 3:
+                        ctato_atz.rendimento = input("Digite o novo logradouro: ")
+                        print(f"Rendimento do cpf {ctato_atz.cpf} atualizado para: {ctato_atz.rendimento}")
+                    else:
+                        print("Opção inválida")
+                        break
+                    lista_pf.append(ctato_atz)    
+
                 elif opcao_pf == 0:
                     print("Voltando ao menu  anterior")
                     break
@@ -67,7 +94,7 @@ def main ():
         elif opcao ==2 :
             lista_pj=[]
             while True:
-                opcao_pj= int(input("Escolha uma opção: \n1-Cadastrar Pessoa Juriídica \n2-Listar Pessoa Jurídica \n3-Remover Cadastro \n0-Voltar ao Menu anterior  "))
+                opcao_pj= int(input("Escolha uma opção: \n1-Cadastrar Pessoa Juriídica \n2-Listar Pessoa Jurídica \n3-Remover Cadastro\n4-Atualizar contato \n0-Voltar ao Menu anterior\n"))
                 if opcao_pj == 1 :
                     novapj = PessoaJuridica()
                     novo_end_pj = Endereco()
@@ -107,6 +134,32 @@ def main ():
                             break
                     if validacao == False:
                         print("Pessoa Juridica não encontrada") 
+                elif opcao_pj==4:
+                    id_atualizar = input("Informe o CPF que pretende atualizar: ") 
+                    ctato_valido=False
+                    for pj in lista_pj:
+                        if id_atualizar == pj.cnpj:
+                            ctato_atz = pj
+                            lista_pj.remove(pj)
+                            ctato_valido = True
+                    if ctato_valido ==False:
+                        print("Contato não encontrado, digite cpf válido.")
+                        break
+                    opcao_atz = int(input("Informe item a ser atualizado: \n1-Nome \n2-Endereco \n3-Rendimento\n"))
+                    if opcao_atz == 1:
+                        ctato_atz.nome = input("Digite o novo nome: ")
+                        print(f"Nome do CNPJ {ctato_atz.cnpj} atualizado para: {ctato_atz.nome}")
+                    elif opcao_atz == 2:
+                        ctato_atz.endereco.logradouro = input("Digite o novo logradouro: ")
+                        ctato_atz.endereco.numero = input("Digite o novo numero: ")
+                        print(f"Endereco do CNPJ {ctato_atz.cnpj} atualizado para: {ctato_atz.endereco.logradouro}, {ctato_atz.endereco.numero}")
+                    elif opcao_atz == 3:
+                        ctato_atz.rendimento = input("Digite o novo logradouro: ")
+                        print(f"Rendimento do CNPJ {ctato_atz.cnpj} atualizado para: {ctato_atz.rendimento}")
+                    else:
+                        print("Opção inválida")
+                        break
+                    lista_pj.append(ctato_atz)     
                 elif opcao_pj == 0:
                     print("Voltando ao menu  anterior")
                     break
